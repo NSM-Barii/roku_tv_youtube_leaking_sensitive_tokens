@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """
-PoC: YouTube Cast Session Hijack via Unauthenticated DIAL Token Leak
+PoC: YouTube on Roku TVs Leaking Sensitive Tokens via Unauthenticated DIAL
 
-YouTube on Roku TVs leaks a screenId via DIAL that can be exchanged
-for a loungeToken — giving any device on the LAN full cast control.
+YouTube on Roku TVs leaks sensitive session tokens (screenId, yumi, oisi,
+deviceId, passiveSessionId) and an internal build hash via DIAL. The leaked
+screenId can be exchanged for a loungeToken — giving any device on the LAN
+full cast control.
 
 Usage:
   python3 poc.py --ip <ROKU_IP> --hijack          # full 4-step hijack chain

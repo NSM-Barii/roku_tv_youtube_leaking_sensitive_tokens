@@ -1,13 +1,13 @@
 
-# YouTube Cast Session Hijack via Unauthenticated DIAL Token Leak
+# YouTube on Roku TVs Leaking Sensitive Tokens via Unauthenticated DIAL
 
-> YouTube on Roku TVs leaks a `screenId` through the DIAL protocol that can be exchanged for a YouTube Lounge API token — giving any unauthenticated device on the local network full cast session control: play arbitrary videos, pause, seek, change volume, and conduct real-time surveillance of the user's viewing activity.
+> YouTube on Roku TVs exposes sensitive session tokens (`screenId`, `yumi`, `oisi`, `deviceId`, `passiveSessionId`) and an internal build hash through the DIAL protocol — readable by any device on the local network with a single unauthenticated GET request. The leaked `screenId` enables full cast session hijack via YouTube's Lounge API: play arbitrary videos, pause, seek, change volume, and conduct real-time surveillance of the user's viewing activity.
 
 ---
 
 ## Summary
 
-YouTube on Roku TVs registers a DIAL endpoint on port 8060 that exposes device-level session tokens in `additionalData` — readable by any device on the local network with a single `GET` request, no authentication required. The critical token is `screenId`, which can be exchanged for full cast session control.
+YouTube on Roku TVs registers a DIAL endpoint on port 8060 that exposes sensitive session tokens and device identifiers in `additionalData` — readable by any device on the local network with a single `GET` request, no authentication required. The most critical token is `screenId`, which can be exchanged for full cast session control.
 
 **Three attack paths to obtain `screenId` — all unauthenticated:**
 
